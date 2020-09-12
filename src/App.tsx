@@ -1,24 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from "react";
+import "./App.css";
+import UserList from "./components/UserList";
+import axios from "axios";
+
+const BASE_URL = "http://localhost:8000";
 
 function App() {
+  const [users, setUsers] = useState([]);
+  const [loader, setLoader] = useState(false);
+  useEffect(() => {
+    getUsers();
+  }, []);
+
+  const getUsers = () => {
+    setLoader(true);
+    axios(`${BASE_URL}/members`)
+      .then((res) => {
+        setUsers(res.data);
+      })
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setLoader(false);
+      });
+  };
+
+  if (loader) return <h2>loading...</h2>;
+  if (!users.length) return <h2>No users found</h2>;
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <UserList users={users} />
     </div>
   );
 }
