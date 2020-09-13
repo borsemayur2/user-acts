@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 import UserList from "./components/UserList";
+import { AppHeader } from "./components/StyledComponents";
 import axios from "axios";
 
 const BASE_URL = "http://localhost:8000";
@@ -29,6 +30,7 @@ function App() {
 
   return (
     <div className="App">
+      <AppHeader>Users</AppHeader>
       <UserList users={users} />
     </div>
   );

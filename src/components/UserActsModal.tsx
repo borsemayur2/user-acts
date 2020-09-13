@@ -1,5 +1,11 @@
 import React from "react";
-import { Modal, ModalContainer } from "./StyledComponents";
+import {
+  ModalToolbar,
+  Button,
+  Modal,
+  ModalContainer,
+  Name,
+} from "./StyledComponents";
 import { IUser } from "../interfaces/IUser";
 import ActivityPeriodList from "./ActivityPeriodList";
 
@@ -12,10 +18,14 @@ const UserActsModal = ({ user, closeModal }: IProps) => {
   return (
     <Modal>
       <ModalContainer>
-        <button onClick={closeModal}>X</button>
-        <h2>{user.real_name}</h2>
-        <h3>Timezone: {user.tz}</h3>
-        <ActivityPeriodList activity_periods={user.activity_periods} />
+        <ModalToolbar>
+          <Name style={{ flex: 1 }}>{user.real_name}</Name>
+          <Button onClick={closeModal} />
+        </ModalToolbar>
+        <ActivityPeriodList
+          activity_periods={user.activity_periods}
+          timezone={user.tz}
+        />
       </ModalContainer>
     </Modal>
   );

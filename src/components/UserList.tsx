@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { UserCard } from "./StyledComponents";
+import { UserCard, Name } from "./StyledComponents";
 import UserActsModal from "./UserActsModal";
 import { IUser } from "../interfaces/IUser";
 
@@ -22,7 +22,7 @@ const UserList = ({ users }: UserProps) => {
     <>
       {users.map((user) => (
         <UserCard key={user.id} onClick={() => handleClickUser(user)}>
-          <p>{user.real_name}</p>
+          <Name>{user.real_name}</Name>
         </UserCard>
       ))}
       {user && <UserActsModal user={user} closeModal={handleCloseModal} />}
