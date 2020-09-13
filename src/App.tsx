@@ -4,7 +4,10 @@ import UserList from "./components/UserList";
 import { AppHeader } from "./components/StyledComponents";
 import axios from "axios";
 
-const BASE_URL = "http://localhost:8000";
+const BASE_URL =
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:8000/members"
+    : "db.json";
 
 function App() {
   const [users, setUsers] = useState([]);
@@ -15,9 +18,9 @@ function App() {
 
   const getUsers = () => {
     setLoader(true);
-    axios(`${BASE_URL}/members`)
+    axios(`${BASE_URL}`)
       .then((res) => {
-        setUsers(res.data);
+        setUsers(res.data.members);
       })
       .catch((error) => console.log(error))
       .finally(() => {
