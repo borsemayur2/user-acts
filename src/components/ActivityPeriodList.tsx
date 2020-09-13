@@ -24,7 +24,10 @@ const ActivityPeriodList = ({ activity_periods, timezone }: IProps) => {
     const getDateActivities = () => {
       const filtered_activity_periods = activity_periods.filter(
         (activity_period) => {
-          const [_date] = activity_period.start_time.split("  ");
+          const _date = activity_period.start_time
+            .split(" ")
+            .slice(0, 3)
+            .join(" ");
           const format = "MMM D YYYY";
 
           return moment(date).isSame(moment(_date, format));

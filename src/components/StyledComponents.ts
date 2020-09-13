@@ -7,6 +7,11 @@ const Card = styled.div`
   border-radius: 0.4em;
 `;
 
+export const UserListContainer = styled.div`
+  height: 90vh;
+  overflow-y: scroll;
+`;
+
 export const UserCard = styled(Card)`
   padding: 1px;
   margin: 20px;
